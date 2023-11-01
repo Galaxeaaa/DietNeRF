@@ -713,7 +713,7 @@ def train():
     parser = config_parser()
     args = parser.parse_args()
 
-    wandb.init(project=args.wandb_project, entity=args.wandb_entity)
+    wandb.init(project=args.wandb_project, entity=args.wandb_entity, dir=args.basedir)
     wandb.run.name = args.expname
     wandb.run.save()
     wandb.config.update(args)
