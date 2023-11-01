@@ -1,3 +1,4 @@
 env/
 wandb/
 dietnerf/logs
+/*.tar.gz
