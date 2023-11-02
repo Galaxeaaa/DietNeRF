@@ -14,6 +14,7 @@ regex
 timm
 fire
 lpips
-scikit-image>=0.12.0,<0.18
+scikit-image
 gdown
 ray
+protobuf<=3.20
