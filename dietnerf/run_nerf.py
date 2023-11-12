@@ -20,6 +20,7 @@ import geometry
 from load_llff import load_llff_data
 from load_deepvoxels import load_dv_data
 from load_blender import load_blender_data, pose_spherical_uniform
+from load_oppo import load_oppo_data
 from run_nerf_helpers import *
 
 
@@ -615,7 +616,7 @@ def config_parser():
 
     # dataset options
     parser.add_argument("--dataset_type", type=str, default='llff', 
-                        help='options: llff / blender / deepvoxels')
+                        help='options: llff / blender / oppo / deepvoxels')
     parser.add_argument("--testskip", type=int, default=8, 
                         help='will load 1/N images from test/val sets, useful for large datasets like deepvoxels')
 
@@ -769,6 +770,19 @@ def train():
         else:
             images = images[...,:3]
 
+    elif args.dataset_type == 'oppo':
+        images, poses, render_poses, hwf, i_split = load_oppo_data(args.datadir, args.half_res, args.testskip, num_render_poses=args.num_render_poses)
+        print('Loaded blender', images.shape, render_poses.shape, hwf, args.datadir)
+        i_train, i_val, i_test = i_split
+
+        near = 2.
+        far = 6.
+
+        if args.white_bkgd:
+            images = images[...,:3]*images[...,-1:] + (1.-images[...,-1:])
+        else:
+            images = images[...,:3]
+
     elif args.dataset_type == 'deepvoxels':
 
         images, poses, render_poses, hwf, i_split = load_dv_data(scene=args.shape,
@@ -896,6 +910,7 @@ def train():
             savedir = os.path.join(basedir, expname, '{}set'.format(name))
             os.makedirs(savedir, exist_ok=True)
 
+            print(f"[DEBUG] idx: {idx}")
             torch.save(poses[idx], os.path.join(savedir, 'poses.pth'))
             torch.save(idx, os.path.join(savedir, 'indices.pth'))
             for i in idx:
@@ -994,7 +1009,7 @@ def train():
                     s12, s3 = np.random.uniform(*args.render_poses_interpolate_range, size=2)
                     pose = geometry.interp3(pose1, pose2, pose3, s12, s3)
                 elif args.render_poses == 'uniform':
-                    assert args.dataset_type == 'blender'
+                    assert args.dataset_type == 'blender' or args.dataset_type == 'oppo'
                     pose = pose_spherical_uniform(args.render_theta_range, args.render_phi_range, args.render_radius_range)
                     pose = pose[:3, :4]
 
