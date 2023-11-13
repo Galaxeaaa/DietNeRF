@@ -56,7 +56,7 @@ def load_oppo_data(basedir, half_res=False, testskip=1, num_render_poses=40):
     metas = {}
     for s in splits:
         with open(
-            os.path.join(basedir, "../../transforms_alignz_{}.json".format(s)), "r"
+            os.path.join(basedir, "../../../transforms_alignz_{}.json".format(s)), "r"
         ) as fp:
             metas[s] = json.load(fp)["frames"]
 
