@@ -772,7 +772,7 @@ def train():
 
     elif args.dataset_type == 'oppo':
         images, poses, render_poses, hwf, i_split = load_oppo_data(args.datadir, args.half_res, args.testskip, num_render_poses=args.num_render_poses)
-        print('Loaded blender', images.shape, render_poses.shape, hwf, args.datadir)
+        print('Loaded oppo', images.shape, render_poses.shape, hwf, args.datadir)
         i_train, i_val, i_test = i_split
 
         near = 2.
