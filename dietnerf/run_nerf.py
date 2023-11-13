@@ -910,7 +910,6 @@ def train():
             savedir = os.path.join(basedir, expname, '{}set'.format(name))
             os.makedirs(savedir, exist_ok=True)
 
-            print(f"[DEBUG] idx: {idx}")
             torch.save(poses[idx], os.path.join(savedir, 'poses.pth'))
             torch.save(idx, os.path.join(savedir, 'indices.pth'))
             for i in idx:
