@@ -40,6 +40,6 @@ then
 fi
 if [ $1 -eq 7 ]
 then
-    CUDA_VISIBLE_DEVICES=0 python run_nerf.py --config configs/dietnerf_6v/oppo_6views_ctr.txt --expname DietNeRF_oppo_6v_fabric-birthday-cake --datadir ./data/openillumination/lighting_patterns/obj_62_fabric-birthday-cake/output/ 
-    CUDA_VISIBLE_DEVICES=0 python run_nerf.py --render_only --render_test --config configs/dietnerf_6v/oppo_6views_ctr.txt --expname DietNeRF_oppo_6v_fabric-birthday-cake --datadir ./data/openillumination/lighting_patterns/obj_62_fabric-birthday-cake/output/
+    CUDA_VISIBLE_DEVICES=0 python run_nerf.py --config configs/dietnerf_6v/oppo_6views_ctr.txt --expname DietNeRF_oppo_6v_fabric-birthday-cake --datadir ./data/openillumination/lighting_patterns/obj_62-fabric-birthday-cake/output/ 
+    CUDA_VISIBLE_DEVICES=0 python run_nerf.py --render_only --render_test --config configs/dietnerf_6v/oppo_6views_ctr.txt --expname DietNeRF_oppo_6v_fabric-birthday-cake --datadir ./data/openillumination/lighting_patterns/obj_62-fabric-birthday-cake/output/
 fi
