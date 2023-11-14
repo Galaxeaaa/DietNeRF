@@ -41,5 +41,5 @@ fi
 if [ $1 -eq 7 ]
 then
     python run_nerf.py --config configs/dietnerf_6v/oppo_6views_ctr.txt --expname DietNeRF_oppo_6v_fabric_birthday_cake --datadir ./data/openillumination/lighting_patterns/obj_62_fabric_birthday_cake/output/ 
-    python run_nerf.py --render_only --render_test --config configs/dietnerf_6v/oppo_6views_ctr.txt --expname DietNeRF_oppo_6v_fabric_birthday_cake --datadir ./data/openillumination/lighting_patterns/obj_62-fabric_birthday_cake/output/
+    python run_nerf.py --render_only --render_test --config configs/dietnerf_6v/oppo_6views_ctr.txt --expname DietNeRF_oppo_6v_fabric_birthday_cake --datadir ./data/openillumination/lighting_patterns/obj_62_fabric_birthday_cake/output/
 fi
