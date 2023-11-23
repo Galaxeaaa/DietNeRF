@@ -21,6 +21,7 @@ from load_llff import load_llff_data
 from load_deepvoxels import load_dv_data
 from load_blender import load_blender_data, pose_spherical_uniform
 from load_oppo import load_oppo_data
+from load_dtu import load_dtu_data
 from run_nerf_helpers import *
 
 
@@ -782,6 +783,21 @@ def train():
             images = images[...,:3]*images[...,-1:] + (1.-images[...,-1:])
         else:
             images = images[...,:3]
+
+    elif args.dataset_type == 'dtu':
+        images, poses, render_poses, hwf, i_split, masks = load_dtu_data(args.datadir, args.half_res)
+        print('Loaded dtu', images.shape, render_poses.shape, hwf, args.datadir)
+        i_train, i_val, i_test = i_split
+
+        near = 0.1
+        far = 5.0
+
+        if args.white_bkgd:
+            images = images[...,:3]*images[...,-1:] + (1.-images[...,-1:])
+        else:
+            images = images[...,:3]
+
+        images = images * masks[..., None]
 
     elif args.dataset_type == 'deepvoxels':
 
