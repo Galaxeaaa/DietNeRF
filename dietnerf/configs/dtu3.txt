@@ -14,7 +14,6 @@ N_iters = 50000
 testskip = 0
 
 ## Additional arguments
-hardcode_train_views = [0, 1, 2, 3]
 i_log_raw_hist = 50
 i_video = 10000
 save_splits = True
